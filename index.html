@@ -59,6 +59,60 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        #desktop-nav a {
+            position: relative;
+        }
+        #desktop-nav a::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -7px;
+            left: 0;
+            height: 2px;
+            background: #F59E0B;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 220ms ease;
+        }
+        #desktop-nav a[aria-current="location"] {
+            color: #F59E0B;
+        }
+        #desktop-nav a[aria-current="location"]::after {
+            transform: scaleX(1);
+        }
+        #mobile-menu a[aria-current="location"] {
+            color: #F59E0B;
+            border-left: 2px solid #F59E0B;
+            padding-left: 0.75rem;
+        }
+
+        #tentang,
+        #destinasi,
+        #budaya,
+        #kuliner,
+        #kontak {
+            scroll-margin-top: 6rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            #desktop-nav a::after {
+                transition: none;
+            }
+            .animate-float,
+            .hero-enter {
+                animation: none !important;
+            }
+            .reveal-on-scroll,
+            .reveal-on-scroll.reveal-ready:not(.is-visible) {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
         .glass-card {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(12px);
@@ -77,6 +131,35 @@
         .batik-pattern {
             background-image: radial-gradient(rgba(217, 119, 6, 0.12) 1px, transparent 1px);
             background-size: 24px 24px;
+        }
+
+        .hero-enter {
+            animation: heroEnter 620ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
+        }
+        .hero-enter-delay-1 {
+            animation-delay: 100ms;
+        }
+        .hero-enter-delay-2 {
+            animation-delay: 190ms;
+        }
+        @keyframes heroEnter {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal-on-scroll {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 560ms ease, transform 560ms cubic-bezier(0.2, 0.7, 0.25, 1);
+        }
+        .reveal-on-scroll.reveal-ready:not(.is-visible) {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        .reveal-delay-1 {
+            transition-delay: 90ms;
+        }
+        .reveal-delay-2 {
+            transition-delay: 160ms;
         }
 
         /* Smooth Custom Scrollbar */
@@ -132,12 +215,12 @@
                 </a>
 
                 <!-- Desktop Menu -->
-                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
-                    <a href="#tentang" class="hover:text-goldCustom transition-colors py-1">Tentang</a>
-                    <a href="#destinasi" class="hover:text-goldCustom transition-colors py-1">Destinasi</a>
-                    <a href="#budaya" class="hover:text-goldCustom transition-colors py-1">Budaya</a>
-                    <a href="#kuliner" class="hover:text-goldCustom transition-colors py-1">Kuliner</a>
-                    <a href="#kontak" class="hover:text-goldCustom transition-colors py-1">Kontak</a>
+                <nav id="desktop-nav" class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300" aria-label="Navigasi utama">
+                    <a href="#tentang" data-section-link class="hover:text-goldCustom transition-colors py-1">Tentang</a>
+                    <a href="#destinasi" data-section-link class="hover:text-goldCustom transition-colors py-1">Destinasi</a>
+                    <a href="#budaya" data-section-link class="hover:text-goldCustom transition-colors py-1">Budaya</a>
+                    <a href="#kuliner" data-section-link class="hover:text-goldCustom transition-colors py-1">Kuliner</a>
+                    <a href="#kontak" data-section-link class="hover:text-goldCustom transition-colors py-1">Kontak</a>
                 </nav>
 
                 <!-- Action Button -->
@@ -149,7 +232,8 @@
                 </div>
 
                 <!-- Mobile Hamburger Button -->
-                <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                <span id="current-section-label" class="md:hidden ml-auto mr-2 text-xs text-gray-400" aria-live="polite">Beranda</span>
+                <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2" aria-label="Buka navigasi" aria-controls="mobile-menu" aria-expanded="false">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -158,13 +242,16 @@
         <!-- Mobile Menu Drawer -->
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-b border-gray-800 px-6 py-6 transition-all">
             <nav class="flex flex-col gap-4 font-medium text-gray-300">
-                <a href="#tentang" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Tentang</a>
-                <a href="#destinasi" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Destinasi</a>
-                <a href="#budaya" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Budaya</a>
-                <a href="#kuliner" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Kuliner</a>
-                <a href="#kontak" class="mobile-link py-2 hover:text-goldCustom">Kontak</a>
+                <a href="#tentang" data-section-link class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Tentang</a>
+                <a href="#destinasi" data-section-link class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Destinasi</a>
+                <a href="#budaya" data-section-link class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Budaya</a>
+                <a href="#kuliner" data-section-link class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Kuliner</a>
+                <a href="#kontak" data-section-link class="mobile-link py-2 hover:text-goldCustom">Kontak</a>
                 <a href="#destinasi" class="mobile-link mt-2 w-full py-3 text-center rounded-xl bg-crimson text-white font-semibold shadow-lg">Jelajahi Sekarang</a>
             </nav>
+        </div>
+        <div id="scroll-progress" class="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10" role="progressbar" aria-label="Progres halaman" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="scroll-progress-fill" class="h-full origin-left bg-goldCustom transition-transform duration-150" style="transform: scaleX(0)"></div>
         </div>
     </header>
 
@@ -183,25 +270,22 @@
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
             <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-goldCustom/30 text-goldCustom text-xs sm:text-sm font-semibold uppercase tracking-widest mb-6 animate-pulse">
-                <i class="fa-solid fa-gem text-xs"></i>
-                <span>Surga Zamrud Khatulistiwa</span>
-            </div>
+           
 
             <!-- Main Heading -->
-            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
+            <h1 class="hero-enter font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
                 Rasakan Keajaiban <br class="hidden sm:inline">
                 <span class="bg-gradient-to-r from-goldCustom via-yellow-200 to-crimson-accent bg-clip-text text-transparent">
                     Nusantara Indonesia
                 </span>
             </h1>
 
-            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
+            <p class="hero-enter hero-enter-delay-1 max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
                 Dari puncak gunung berapi yang megah hingga gugusan terumbu karang laut dalam, temukan kekayaan budaya, alam, dan kuliner terindah di dunia.
             </p>
 
             <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div class="hero-enter hero-enter-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                 <a href="#destinasi" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold shadow-xl shadow-crimson/25 hover:shadow-goldCustom/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
                     <span>Mulai Petualangan</span>
                     <i class="fa-solid fa-compass"></i>
@@ -213,7 +297,7 @@
             </div>
 
             <!-- Stats Bar Grid -->
-            <div id="tentang" class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+            <div id="tentang" class="reveal-on-scroll grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
                 <div class="glass-card p-5 rounded-2xl text-center border-t-2 border-t-crimson">
                     <div class="font-serif text-3xl sm:text-4xl font-extrabold text-goldCustom mb-1">17.000+</div>
                     <div class="text-xs sm:text-sm text-gray-400 font-medium">Pulau Eksotis</div>
@@ -239,7 +323,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Section Header -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div class="reveal-on-scroll flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
                     <span class="text-goldCustom font-semibold text-sm tracking-widest uppercase mb-2 block">Destinasi Utama</span>
                     <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Eksplorasi Keindahan Alam</h2>
@@ -258,7 +342,7 @@
             </div>
 
             <!-- Destinations Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destination-grid">
+            <div class="reveal-on-scroll reveal-delay-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destination-grid">
                 
                 <!-- Card 1: Raja Ampat -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="bahari">
@@ -289,7 +373,7 @@
                 <!-- Card 2: Borobudur -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="budaya">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1609828913642-a55e9e5a6231?q=80&w=800&auto=format&fit=crop" 
+                        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg/960px-Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg" 
                              alt="Candi Borobudur" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                              onerror="this.src='https://placehold.co/800x600/991B1B/ffffff?text=Borobudur'">
@@ -305,7 +389,7 @@
                                 Candi Buddha terbesar di dunia yang dibangun abad ke-9, warisan sejarah dunia UNESCO.
                             </p>
                         </div>
-                        <button onclick="openModal('Candi Borobudur', 'Magelang, Jawa Tengah', 'Candi Borobudur adalah monumen Buddha terbesar di dunia. Didesain dengan arsitektur Jawa kuno, candi ini dihiasi dengan 2.672 panel relief dan 504 patung Buddha.', 'https://images.unsplash.com/photo-1609828913642-a55e9e5a6231?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <button onclick="openModal('Candi Borobudur', 'Magelang, Jawa Tengah', 'Candi Borobudur adalah monumen Buddha terbesar di dunia. Didesain dengan arsitektur Jawa kuno, candi ini dihiasi dengan 2.672 panel relief dan 504 patung Buddha.', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg/960px-Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
                             <span>Lihat Detail</span>
                             <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </button>
@@ -371,7 +455,7 @@
     <!-- SECTION WARISAN BUDAYA (Interactive Showcase) -->
     <section id="budaya" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
+            <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
                 <span class="text-goldCustom font-semibold text-sm tracking-widest uppercase mb-2 block">Kekayaan Tradisional</span>
                 <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Warisan Budaya Mahakarya</h2>
                 <p class="text-gray-400 text-sm">
@@ -380,7 +464,7 @@
             </div>
 
             <!-- Culture Interactive Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="reveal-on-scroll reveal-delay-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
                 <!-- Cultural Navigation Tabs (Left 4 Cols) -->
                 <div class="lg:col-span-5 flex flex-col gap-4">
@@ -408,14 +492,14 @@
                         </div>
                     </div>
 
-                    <div onclick="switchCulture('gamelan')" id="tab-gamelan" class="culture-tab glass-card p-5 rounded-2xl cursor-pointer border-l-4 border-l-transparent transition-all hover:bg-white/10">
+                    <div onclick="switchCulture('beladiri')" id="tab-beladiri" class="culture-tab glass-card p-5 rounded-2xl cursor-pointer border-l-4 border-l-transparent transition-all hover:bg-white/10">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-emeraldCustom/30 flex items-center justify-center text-emeraldCustom-light font-bold text-xl">
-                                <i class="fa-solid fa-music"></i>
+                                <i class="fa-solid fa-hand-fist"></i>
                             </div>
                             <div>
-                                <h4 class="font-serif text-lg font-bold text-white">Gamelan & Musik Tradisional</h4>
-                                <p class="text-gray-400 text-xs">Ansambel musik gong dan metalofon bernada harmonis</p>
+                                <h4 class="font-serif text-lg font-bold text-white">Beladiri Tradisional</h4>
+                                <p class="text-gray-400 text-xs">Pencak silat, warisan gerak dan disiplin Nusantara</p>
                             </div>
                         </div>
                     </div>
@@ -426,12 +510,13 @@
                     <div class="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-goldCustom/20" id="culture-display">
                         <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-6">
                             <img id="culture-img" 
-                                 src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?q=80&w=1000&auto=format&fit=crop" 
-                                 alt="Batik Indonesia" 
+                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqE_UyAQhD-ro_DA0xe6ni1Pjr7SZSlyKsDGabFsyy3g&s=10" 
+                                 alt="Kain batik Peranakan Indonesia bermotif burung dan bunga" 
                                  class="w-full h-full object-cover transition-opacity duration-500"
                                  onerror="this.src='https://placehold.co/1000x600/D97706/ffffff?text=Batik+Indonesia'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-transparent to-transparent"></div>
                             <span id="culture-tag" class="absolute bottom-4 left-4 bg-goldCustom text-slateBg text-xs font-bold px-3 py-1.5 rounded-full uppercase">Kain Mahakarya</span>
+                            <a id="culture-credit" href="https://commons.wikimedia.org/wiki/File:Peranakan_batik_altar_cloth,_late_19th_century,_East-West_Center.JPG" target="_blank" rel="noopener noreferrer" title="Foto kain batik Peranakan · CC0" aria-label="Informasi sumber foto kain batik Peranakan, lisensi CC0" class="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-black/60 text-white/90 flex items-center justify-center"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
                         </div>
                         
                         <h3 id="culture-title" class="font-serif text-2xl sm:text-3xl font-bold text-white mb-3">Seni Lukis Batik Tradisional</h3>
@@ -444,7 +529,7 @@
                                 <i class="fa-solid fa-award text-goldCustom"></i>
                                 Akreditasi Resmi UNESCO
                             </span>
-                            <span class="text-goldCustom font-semibold cursor-pointer hover:underline">Pelajari Teknik Canting &rarr;</span>
+                            <span id="culture-action" class="text-goldCustom font-semibold">Jelajahi Motif Batik &rarr;</span>
                         </div>
                     </div>
                 </div>
@@ -456,7 +541,7 @@
     <!-- SECTION KULINER KHAS (Grid & Taste Profiles) -->
     <section id="kuliner" class="py-24 bg-darkBg/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
+            <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
                 <span class="text-crimson-accent font-semibold text-sm tracking-widest uppercase mb-2 block">Cita Rasa Nusantara</span>
                 <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Kuliner Kaya Rempah</h2>
                 <p class="text-gray-400 text-sm">
@@ -465,17 +550,18 @@
             </div>
 
             <!-- Culinary Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="reveal-on-scroll reveal-delay-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Food 1: Rendang -->
                 <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
                     <div>
                         <div class="relative h-48 rounded-xl overflow-hidden mb-4">
-                            <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=600&auto=format&fit=crop" 
-                                 alt="Rendang Daging" 
+                                         <img src="https://www.static-src.com/siva/asset/01_2026/84-yt-meal-bumbu-rendang.jpg" 
+                                   alt="Rendang daging sapi berbumbu rempah khas Indonesia" 
                                  class="w-full h-full object-cover"
                                  onerror="this.src='https://placehold.co/600x400/991B1B/ffffff?text=Rendang'">
                             <span class="absolute top-3 left-3 bg-crimson text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Minangkabau</span>
+                                     <a href="https://commons.wikimedia.org/wiki/File:Rendang_daging_sapi_asli_Padang.JPG" target="_blank" rel="noopener noreferrer" title="Foto: Midori · CC BY 3.0" aria-label="Kredit dan lisensi foto rendang: Midori, CC BY 3.0" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/65 text-white/90 flex items-center justify-center"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
                         </div>
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="font-serif text-lg font-bold text-white">Rendang Daging</h3>
@@ -496,20 +582,21 @@
                 <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
                     <div>
                         <div class="relative h-48 rounded-xl overflow-hidden mb-4">
-                            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=600&auto=format&fit=crop" 
-                                 alt="Nasi Goreng" 
+                               <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Nasi_Goreng_Kampung_%2811967588375%29.jpg/1280px-Nasi_Goreng_Kampung_%2811967588375%29.jpg" 
+                                 alt="Nasi goreng kampung dengan kerupuk dan pelengkap" 
                                  class="w-full h-full object-cover"
                                  onerror="this.src='https://placehold.co/600x400/D97706/ffffff?text=Nasi+Goreng'">
                             <span class="absolute top-3 left-3 bg-goldCustom text-slateBg text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Nasional</span>
+                                     <a href="https://commons.wikimedia.org/wiki/File:Nasi_Goreng_Kampung_(11967588375).jpg" target="_blank" rel="noopener noreferrer" title="Foto: shankar s. · CC BY 2.0" aria-label="Kredit dan lisensi foto nasi goreng: shankar s., CC BY 2.0" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/65 text-white/90 flex items-center justify-center"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
                         </div>
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-serif text-lg font-bold text-white">Nasi Goreng Spesial</h3>
+                            <h3 class="font-serif text-lg font-bold text-white">Nasi Goreng Kampung</h3>
                             <div class="flex text-goldCustom text-xs">
                                 <i class="fa-solid fa-star"></i>
                                 <span class="ml-1 text-gray-300 font-bold">4.9</span>
                             </div>
                         </div>
-                        <p class="text-gray-400 text-xs mb-4">Nasi beraroma kecap manis bercita rasa gurih dengan pelengkap telur, ayam, dan kerupuk renyah.</p>
+                        <p class="text-gray-400 text-xs mb-4">Nasi goreng berbumbu dengan sambal, kerupuk, dan pelengkap segar khas sajian rumahan Nusantara.</p>
                     </div>
                     <div class="flex items-center gap-1.5 flex-wrap">
                         <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-yellow-300">Manis Gurih</span>
@@ -521,11 +608,12 @@
                 <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
                     <div>
                         <div class="relative h-48 rounded-xl overflow-hidden mb-4">
-                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop" 
-                                 alt="Sate" 
+                               <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Sate_Maranggi_3.jpg/960px-Sate_Maranggi_3.jpg" 
+                                   alt="Sate Maranggi sapi dengan acar sayuran" 
                                  class="w-full h-full object-cover"
                                  onerror="this.src='https://placehold.co/600x400/064E3B/ffffff?text=Sate'">
                             <span class="absolute top-3 left-3 bg-emeraldCustom-light text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Jawa Barat</span>
+                                     <a href="https://commons.wikimedia.org/wiki/File:Sate_Maranggi_3.jpg" target="_blank" rel="noopener noreferrer" title="Foto: Gunawan Kartapranata · CC BY-SA 4.0" aria-label="Kredit dan lisensi foto sate Maranggi: Gunawan Kartapranata, CC BY-SA 4.0" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/65 text-white/90 flex items-center justify-center"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
                         </div>
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="font-serif text-lg font-bold text-white">Sate Maranggi</h3>
@@ -546,11 +634,12 @@
                 <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
                     <div>
                         <div class="relative h-48 rounded-xl overflow-hidden mb-4">
-                            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=600&auto=format&fit=crop" 
-                                 alt="Gado Gado" 
+                               <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Gado-gado_2.jpg/960px-Gado-gado_2.jpg" 
+                                   alt="Gado-gado dengan sayuran, kerupuk, dan saus kacang" 
                                  class="w-full h-full object-cover"
                                  onerror="this.src='https://placehold.co/600x400/991B1B/ffffff?text=Gado+Gado'">
                             <span class="absolute top-3 left-3 bg-crimson text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Jakarta</span>
+                                     <a href="https://commons.wikimedia.org/wiki/File:Gado-gado_2.jpg" target="_blank" rel="noopener noreferrer" title="Foto: Astari28 · CC BY-SA 4.0" aria-label="Kredit dan lisensi foto gado-gado: Astari28, CC BY-SA 4.0" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/65 text-white/90 flex items-center justify-center"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></a>
                         </div>
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="font-serif text-lg font-bold text-white">Gado-Gado Betawi</h3>
@@ -574,7 +663,7 @@
     <!-- SECTION NEWSLETTER & KONTAK -->
     <section id="kontak" class="py-20 relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-goldCustom/30 relative z-10 text-center bg-gradient-to-b from-darkBg to-slateBg">
+            <div class="reveal-on-scroll glass-card rounded-3xl p-8 sm:p-12 border border-goldCustom/30 relative z-10 text-center bg-gradient-to-b from-darkBg to-slateBg">
                 
                 <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-crimson to-goldCustom flex items-center justify-center mx-auto mb-6 text-2xl text-white shadow-lg">
                     <i class="fa-solid fa-paper-plane"></i>
@@ -615,7 +704,7 @@
                 <div class="md:col-span-2">
                     <a href="#" class="flex items-center gap-3 mb-4">
                         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-crimson to-goldCustom flex items-center justify-center text-white font-bold text-sm">
-                            N
+                            <i class="fa-solid fa-compass text-white text-lg"></i>
                         </div>
                         <span class="font-serif font-bold text-lg text-white">NUSANTARA</span>
                     </a>
@@ -649,7 +738,7 @@
                             <i class="fa-brands fa-youtube text-sm"></i>
                         </a>
                         <a href="#" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-gray-300 hover:text-goldCustom hover:border-goldCustom transition-all">
-                            <i class="fa-brands fa-x-twitter text-sm"></i>
+                            <i class="fa-brands fa-tiktok text-sm"></i>
                         </a>
                     </div>
                     <span class="text-[11px] block text-gray-500">Hubungi: info@nusantara-pesona.id</span>
@@ -680,6 +769,7 @@
                 <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-transparent to-transparent"></div>
                 <span id="modal-loc" class="absolute bottom-4 left-6 bg-crimson text-white text-xs font-bold px-3 py-1 rounded-full uppercase"></span>
+                <a id="modal-img-credit" href="https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1013_8739.jpg" target="_blank" rel="noopener noreferrer" class="hidden absolute bottom-4 right-4 bg-black/60 text-white/90 text-[10px] px-2 py-1 rounded">Foto: Jakub Hałun · CC BY-SA 4.0</a>
             </div>
 
             <!-- Modal Content -->
@@ -698,15 +788,66 @@
 
     <!-- JAVASCRIPT FOR INTERACTION -->
     <script>
-        // Navbar Scroll Effect
+        // Navigation state and page progress
         const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
+        const progressBar = document.getElementById('scroll-progress');
+        const progressFill = document.getElementById('scroll-progress-fill');
+        const currentSectionLabel = document.getElementById('current-section-label');
+        const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
+        const sectionTargets = [...new Map(sectionLinks.map(link => [link.hash, document.querySelector(link.hash)])).values()].filter(Boolean);
+        const revealTargets = document.querySelectorAll('.reveal-on-scroll');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        revealTargets.forEach(target => target.classList.add(prefersReducedMotion ? 'is-visible' : 'reveal-ready'));
+        let scrollUpdateScheduled = false;
+
+        function updateNavigationState() {
             if (window.scrollY > 50) {
                 navbar.classList.add('glass-nav', 'shadow-2xl');
             } else {
                 navbar.classList.remove('glass-nav', 'shadow-2xl');
             }
-        });
+
+            const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollableHeight > 0 ? Math.min(100, Math.round((window.scrollY / scrollableHeight) * 100)) : 0;
+            progressFill.style.transform = `scaleX(${progress / 100})`;
+            progressBar.setAttribute('aria-valuenow', String(progress));
+
+            const marker = window.scrollY + window.innerHeight * 0.32;
+            let currentTarget = null;
+            sectionTargets.forEach(target => {
+                if (target.offsetTop <= marker) currentTarget = target;
+            });
+
+            const currentHash = currentTarget ? `#${currentTarget.id}` : '';
+            sectionLinks.forEach(link => {
+                if (link.hash === currentHash && currentHash) {
+                    link.setAttribute('aria-current', 'location');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+
+            const activeLink = sectionLinks.find(link => link.hash === currentHash);
+            currentSectionLabel.textContent = activeLink && window.scrollY > 120 ? activeLink.textContent.trim() : 'Beranda';
+
+            if (!prefersReducedMotion) {
+                revealTargets.forEach(target => {
+                    if (target.getBoundingClientRect().top < window.innerHeight * 0.88) {
+                        target.classList.add('is-visible');
+                    }
+                });
+            }
+
+            scrollUpdateScheduled = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (scrollUpdateScheduled) return;
+            scrollUpdateScheduled = true;
+            window.requestAnimationFrame(updateNavigationState);
+        }, { passive: true });
+        window.addEventListener('resize', updateNavigationState);
+        updateNavigationState();
 
         // Mobile Menu Toggle
         const menuBtn = document.getElementById('menu-btn');
@@ -715,11 +856,16 @@
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+            const isExpanded = !mobileMenu.classList.contains('hidden');
+            menuBtn.setAttribute('aria-expanded', String(isExpanded));
+            menuBtn.setAttribute('aria-label', isExpanded ? 'Tutup navigasi' : 'Buka navigasi');
         });
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.setAttribute('aria-label', 'Buka navigasi');
             });
         });
 
@@ -752,19 +898,31 @@
                 title: "Seni Lukis Batik Tradisional",
                 desc: "Batik adalah teknik menggambar di atas kain menggunakan malam (lilin khusus). Setiap motif batik—seperti Parang, Megamendung, dan Kawung—memiliki filosofi, doa, serta status sosial tersendiri bagi pemakainya.",
                 tag: "Kain Mahakarya",
-                img: "https://images.unsplash.com/photo-1601972599720-36938d4ecd31?q=80&w=1000&auto=format&fit=crop"
+                alt: "Kain batik Peranakan Indonesia bermotif burung dan bunga",
+                img: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Peranakan_batik_altar_cloth%2C_late_19th_century%2C_East-West_Center.JPG/1280px-Peranakan_batik_altar_cloth%2C_late_19th_century%2C_East-West_Center.JPG",
+                credit: "Foto kain batik Peranakan · CC0",
+                creditUrl: "https://commons.wikimedia.org/wiki/File:Peranakan_batik_altar_cloth,_late_19th_century,_East-West_Center.JPG",
+                action: "Jelajahi Motif Batik →"
             },
             wayang: {
                 title: "Seni Pertunjukan Wayang Kulit",
                 desc: "Wayang kulit adalah seni pertunjukan seni bayangan tradisional asal Jawa dan Bali. Dimainkan oleh seorang Dalang, Wayang membawakan kisah Mahabharata atau Ramayana yang sarat nasihat kehidupan.",
                 tag: "Seni Teater Kuno",
-                img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1000&auto=format&fit=crop"
+                alt: "Pertunjukan wayang kulit dengan dalang dan boneka di depan kelir bercahaya",
+                img: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Pertunjukan_Wayang_Kulit.jpg/1280px-Pertunjukan_Wayang_Kulit.jpg",
+                credit: "Foto: FaizAttariqi · CC BY-SA 4.0",
+                creditUrl: "https://commons.wikimedia.org/wiki/File:Pertunjukan_Wayang_Kulit.jpg",
+                action: "Kenali Kisah Wayang →"
             },
-            gamelan: {
-                title: "Ansambel Musik Gamelan",
-                desc: "Gamelan adalah ansambel musik tradisional yang menonjolkan demung, saron, bonang, dan gong. Harmonisasi nadanya yang pentatonis menciptakan alunan meditatif khas Jawa dan Bali.",
-                tag: "Orkestra Tradisional",
-                img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop"
+            beladiri: {
+                title: "Silek Lanyah Minangkabau",
+                desc: "Silek Lanyah adalah pencak silat tradisional Minangkabau dari Sumatera Barat. Gerakannya dipraktikkan di sawah berlumpur sebagai latihan ketangkasan, keseimbangan, dan penghormatan terhadap tradisi.",
+                tag: "Beladiri Tradisional",
+                alt: "Dua pesilat pria melakukan Silek Lanyah di sawah berlumpur, Sumatera Barat",
+                img: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Silek_Lanyah_2020_-_Two_men_performing_martial_art_in_a_stream.jpg/1280px-Silek_Lanyah_2020_-_Two_men_performing_martial_art_in_a_stream.jpg",
+                credit: "Foto: Dody Guci · CC BY-SA 4.0",
+                creditUrl: "https://commons.wikimedia.org/wiki/File:Silek_Lanyah_2020_-_Two_men_performing_martial_art_in_a_stream.jpg",
+                action: "Pelajari Gerak Silek →"
             }
         };
 
@@ -781,9 +939,18 @@
             img.style.opacity = '0';
             setTimeout(() => {
                 img.src = data.img;
+                img.alt = data.alt || data.title;
                 document.getElementById('culture-title').innerText = data.title;
                 document.getElementById('culture-desc').innerText = data.desc;
                 document.getElementById('culture-tag').innerText = data.tag;
+                document.getElementById('culture-action').innerText = data.action;
+                const credit = document.getElementById('culture-credit');
+                credit.classList.toggle('hidden', !data.credit);
+                if (data.credit) {
+                    credit.title = data.credit;
+                    credit.setAttribute('aria-label', data.credit);
+                    credit.href = data.creditUrl;
+                }
                 img.style.opacity = '1';
             }, 200);
         }
@@ -794,6 +961,7 @@
             document.getElementById('modal-loc').innerText = loc;
             document.getElementById('modal-desc').innerText = desc;
             document.getElementById('modal-img').src = img;
+            document.getElementById('modal-img-credit').classList.toggle('hidden', title !== 'Candi Borobudur');
             document.getElementById('detail-modal').classList.remove('hidden');
         }
 
