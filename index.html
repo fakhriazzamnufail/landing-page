@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nusantara - Pesona Keajaiban Indonesia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crimson: {
+                            DEFAULT: '#991B1B',
+                            dark: '#7F1D1D',
+                            deep: '#450A0A',
+                            accent: '#DC2626'
+                        },
+                        emeraldCustom: {
+                            DEFAULT: '#064E3B',
+                            dark: '#022C22',
+                            light: '#047857'
+                        },
+                        goldCustom: {
+                            DEFAULT: '#D97706',
+                            light: '#F59E0B',
+                            amber: '#B45309'
+                        },
+                        darkBg: '#0F172A',
+                        slateBg: '#090D16',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Modern Glassmorphic Styles */
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(217, 119, 6, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.15);
+        }
+
+        .batik-pattern {
+            background-image: radial-gradient(rgba(217, 119, 6, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090D16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #991B1B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D97706;
+        }
+
+        /* Subtle floating animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        /* Hide scrollbars for clean galleries */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans bg-slateBg text-gray-100 antialiased overflow-x-hidden selection:bg-crimson selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-crimson to-goldCustom flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fa-solid fa-compass text-white text-lg"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif font-bold text-xl tracking-wider text-white group-hover:text-goldCustom transition-colors">NUSANTARA</span>
+                        <span class="text-[9px] tracking-widest text-goldCustom font-semibold uppercase -mt-1">Pesona Indonesia</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                    <a href="#tentang" class="hover:text-goldCustom transition-colors py-1">Tentang</a>
+                    <a href="#destinasi" class="hover:text-goldCustom transition-colors py-1">Destinasi</a>
+                    <a href="#budaya" class="hover:text-goldCustom transition-colors py-1">Budaya</a>
+                    <a href="#kuliner" class="hover:text-goldCustom transition-colors py-1">Kuliner</a>
+                    <a href="#kontak" class="hover:text-goldCustom transition-colors py-1">Kontak</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#destinasi" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-crimson to-crimson-dark text-white font-semibold text-sm shadow-lg shadow-crimson/30 hover:shadow-crimson/50 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                        <span>Jelajahi Sekarang</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-b border-gray-800 px-6 py-6 transition-all">
+            <nav class="flex flex-col gap-4 font-medium text-gray-300">
+                <a href="#tentang" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Tentang</a>
+                <a href="#destinasi" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Destinasi</a>
+                <a href="#budaya" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Budaya</a>
+                <a href="#kuliner" class="mobile-link py-2 border-b border-gray-800 hover:text-goldCustom">Kuliner</a>
+                <a href="#kontak" class="mobile-link py-2 hover:text-goldCustom">Kontak</a>
+                <a href="#destinasi" class="mobile-link mt-2 w-full py-3 text-center rounded-xl bg-crimson text-white font-semibold shadow-lg">Jelajahi Sekarang</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+        <!-- Background Hero Image & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=2000&auto=format&fit=crop" 
+                 alt="Indonesia Landscape Hero" 
+                 class="w-full h-full object-cover scale-105 animate-float opacity-35"
+                 onerror="this.src='https://placehold.co/1920x1080/090D16/ffffff?text=Nusantara+Indonesia'">
+            <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-slateBg/70 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-slateBg/90 via-transparent to-slateBg/90"></div>
+            <div class="absolute inset-0 batik-pattern opacity-40"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-goldCustom/30 text-goldCustom text-xs sm:text-sm font-semibold uppercase tracking-widest mb-6 animate-pulse">
+                <i class="fa-solid fa-gem text-xs"></i>
+                <span>Surga Zamrud Khatulistiwa</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
+                Rasakan Keajaiban <br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-goldCustom via-yellow-200 to-crimson-accent bg-clip-text text-transparent">
+                    Nusantara Indonesia
+                </span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
+                Dari puncak gunung berapi yang megah hingga gugusan terumbu karang laut dalam, temukan kekayaan budaya, alam, dan kuliner terindah di dunia.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#destinasi" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold shadow-xl shadow-crimson/25 hover:shadow-goldCustom/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                    <span>Mulai Petualangan</span>
+                    <i class="fa-solid fa-compass"></i>
+                </a>
+                <a href="#budaya" class="w-full sm:w-auto px-8 py-4 rounded-full glass-card text-gray-200 hover:text-white font-semibold hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-circle-play text-goldCustom"></i>
+                    <span>Eksplor Budaya</span>
+                </a>
+            </div>
+
+            <!-- Stats Bar Grid -->
+            <div id="tentang" class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+                <div class="glass-card p-5 rounded-2xl text-center border-t-2 border-t-crimson">
+                    <div class="font-serif text-3xl sm:text-4xl font-extrabold text-goldCustom mb-1">17.000+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Pulau Eksotis</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center border-t-2 border-t-emeraldCustom-light">
+                    <div class="font-serif text-3xl sm:text-4xl font-extrabold text-emeraldCustom-light mb-1">300+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Kelompok Suku</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center border-t-2 border-t-goldCustom">
+                    <div class="font-serif text-3xl sm:text-4xl font-extrabold text-goldCustom mb-1">700+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Bahasa Daerah</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl text-center border-t-2 border-t-crimson">
+                    <div class="font-serif text-3xl sm:text-4xl font-extrabold text-crimson-accent mb-1">10+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Situs UNESCO</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION DESTINASI UNGGULAN -->
+    <section id="destinasi" class="py-24 relative bg-darkBg/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-goldCustom font-semibold text-sm tracking-widest uppercase mb-2 block">Destinasi Utama</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Eksplorasi Keindahan Alam</h2>
+                </div>
+                <p class="text-gray-400 max-w-md mt-4 md:mt-0 text-sm">
+                    Nikmati keajaiban lanskap yang menakjubkan dari pantai tropis berpasir putih hingga mahakarya kebudayaan kuno.
+                </p>
+            </div>
+
+            <!-- Destination Category Filter -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-8">
+                <button onclick="filterDestinations('all')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold bg-crimson text-white whitespace-nowrap shadow-md transition-all">Semua Destinasi</button>
+                <button onclick="filterDestinations('bahari')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Bahari & Pantai</button>
+                <button onclick="filterDestinations('budaya')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Candi & Sejarah</button>
+                <button onclick="filterDestinations('gunung')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Gunung & Alam</button>
+            </div>
+
+            <!-- Destinations Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destination-grid">
+                
+                <!-- Card 1: Raja Ampat -->
+                <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="bahari">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=800&auto=format&fit=crop" 
+                             alt="Raja Ampat" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/800x600/064E3B/ffffff?text=Raja+Ampat'">
+                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Papua Barat</span>
+                        <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-star text-xs"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Raja Ampat</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
+                                Gumpalan pulau karang eksotis dengan keanekaragaman hayati laut terkaya di planet bumi.
+                            </p>
+                        </div>
+                        <button onclick="openModal('Raja Ampat', 'Papua Barat', 'Raja Ampat adalah gugusan kepulauan yang terletak di barat bagian bagian Kepala Burung Pulau Papua. Perairan Raja Ampat merupakan salah satu dari 10 perairan terbaik untuk menyelam di seluruh dunia.', 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <span>Lihat Detail</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Borobudur -->
+                <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="budaya">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1609828913642-a55e9e5a6231?q=80&w=800&auto=format&fit=crop" 
+                             alt="Candi Borobudur" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/800x600/991B1B/ffffff?text=Borobudur'">
+                        <span class="absolute top-4 left-4 bg-crimson/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Jawa Tengah</span>
+                        <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-star text-xs"></i> 4.8
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Candi Borobudur</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
+                                Candi Buddha terbesar di dunia yang dibangun abad ke-9, warisan sejarah dunia UNESCO.
+                            </p>
+                        </div>
+                        <button onclick="openModal('Candi Borobudur', 'Magelang, Jawa Tengah', 'Candi Borobudur adalah monumen Buddha terbesar di dunia. Didesain dengan arsitektur Jawa kuno, candi ini dihiasi dengan 2.672 panel relief dan 504 patung Buddha.', 'https://images.unsplash.com/photo-1609828913642-a55e9e5a6231?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <span>Lihat Detail</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Taman Nasional Komodo -->
+                <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="gunung">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=800&auto=format&fit=crop" 
+                             alt="Pulau Padar Komodo" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/800x600/D97706/ffffff?text=Komodo'">
+                        <span class="absolute top-4 left-4 bg-goldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Nusa Tenggara Timur</span>
+                        <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-star text-xs"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Pulau Komodo</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
+                                Habitat asli kadal purba terbesar di dunia, dikelilingi lanskap perbukitan savana spektakuler.
+                            </p>
+                        </div>
+                        <button onclick="openModal('Taman Nasional Komodo', 'NTT', 'Taman Nasional Komodo melindungi kadal komodo purba yang langka serta panorama perbukitan savana khas dan Pink Beach yang eksotis.', 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <span>Lihat Detail</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Bali & Ubud -->
+                <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="bahari">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" 
+                             alt="Bali Ubud" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://placehold.co/800x600/064E3B/ffffff?text=Bali'">
+                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bali</span>
+                        <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-star text-xs"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Ubud & Tanah Lot</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
+                                Pulau Dewata yang terkenal dengan ketenangan persawahan terasering, pura spiritual, dan pantai indah.
+                            </p>
+                        </div>
+                        <button onclick="openModal('Ubud & Bali', 'Provinsi Bali', 'Bali menawarkan harmoni antara seni, ketenangan alam Ubud, pantai eksotis, dan budaya spiritual Hindu Bali yang autentik.', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <span>Lihat Detail</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION WARISAN BUDAYA (Interactive Showcase) -->
+    <section id="budaya" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-goldCustom font-semibold text-sm tracking-widest uppercase mb-2 block">Kekayaan Tradisional</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Warisan Budaya Mahakarya</h2>
+                <p class="text-gray-400 text-sm">
+                    Kekayaan karya seni, musik, dan tarian warisan leluhur yang terus diwariskan dari generasi ke generasi.
+                </p>
+            </div>
+
+            <!-- Culture Interactive Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Cultural Navigation Tabs (Left 4 Cols) -->
+                <div class="lg:col-span-5 flex flex-col gap-4">
+                    <div onclick="switchCulture('batik')" id="tab-batik" class="culture-tab glass-card p-5 rounded-2xl cursor-pointer border-l-4 border-l-goldCustom transition-all hover:bg-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-goldCustom/20 flex items-center justify-center text-goldCustom font-bold text-xl">
+                                <i class="fa-solid fa-scroll"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-white">Batik Indonesia</h4>
+                                <p class="text-gray-400 text-xs">Warisan Kemanusiaan untuk Budaya Lisan dan Nonwiwujud UNESCO</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="switchCulture('wayang')" id="tab-wayang" class="culture-tab glass-card p-5 rounded-2xl cursor-pointer border-l-4 border-l-transparent transition-all hover:bg-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-crimson/20 flex items-center justify-center text-crimson-accent font-bold text-xl">
+                                <i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-white">Wayang Kulit</h4>
+                                <p class="text-gray-400 text-xs">Seni pertunjukan bayangan naratif bernilai filosofi tinggi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="switchCulture('gamelan')" id="tab-gamelan" class="culture-tab glass-card p-5 rounded-2xl cursor-pointer border-l-4 border-l-transparent transition-all hover:bg-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emeraldCustom/30 flex items-center justify-center text-emeraldCustom-light font-bold text-xl">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-white">Gamelan & Musik Tradisional</h4>
+                                <p class="text-gray-400 text-xs">Ansambel musik gong dan metalofon bernada harmonis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cultural Content Preview Display (Right 7 Cols) -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-goldCustom/20" id="culture-display">
+                        <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-6">
+                            <img id="culture-img" 
+                                 src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="Batik Indonesia" 
+                                 class="w-full h-full object-cover transition-opacity duration-500"
+                                 onerror="this.src='https://placehold.co/1000x600/D97706/ffffff?text=Batik+Indonesia'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-transparent to-transparent"></div>
+                            <span id="culture-tag" class="absolute bottom-4 left-4 bg-goldCustom text-slateBg text-xs font-bold px-3 py-1.5 rounded-full uppercase">Kain Mahakarya</span>
+                        </div>
+                        
+                        <h3 id="culture-title" class="font-serif text-2xl sm:text-3xl font-bold text-white mb-3">Seni Lukis Batik Tradisional</h3>
+                        <p id="culture-desc" class="text-gray-300 text-sm leading-relaxed mb-6">
+                            Batik adalah teknik menggambar di atas kain menggunakan malam (lilin khusus). Setiap motif batik—seperti Parang, Megamendung, dan Kawung—memiliki filosofi, doa, serta status sosial tersendiri bagi pemakainya.
+                        </p>
+
+                        <div class="flex items-center justify-between border-t border-gray-800 pt-4 text-xs text-gray-400">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-award text-goldCustom"></i>
+                                Akreditasi Resmi UNESCO
+                            </span>
+                            <span class="text-goldCustom font-semibold cursor-pointer hover:underline">Pelajari Teknik Canting &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION KULINER KHAS (Grid & Taste Profiles) -->
+    <section id="kuliner" class="py-24 bg-darkBg/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-crimson-accent font-semibold text-sm tracking-widest uppercase mb-2 block">Cita Rasa Nusantara</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">Kuliner Kaya Rempah</h2>
+                <p class="text-gray-400 text-sm">
+                    Jelajahi kelezatan rempah-rempah autentik khas Nusantara yang diakui sebagai salah satu yang terbaik di dunia.
+                </p>
+            </div>
+
+            <!-- Culinary Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Food 1: Rendang -->
+                <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Rendang Daging" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/600x400/991B1B/ffffff?text=Rendang'">
+                            <span class="absolute top-3 left-3 bg-crimson text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Minangkabau</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif text-lg font-bold text-white">Rendang Daging</h3>
+                            <div class="flex text-goldCustom text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="ml-1 text-gray-300 font-bold">5.0</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Masakan daging berminyak rempah santan pekat yang dimasak berjam-jam hingga gurih sempurna.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-goldCustom">Rempah Kaya</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-red-400">Gurih & Pedas</span>
+                    </div>
+                </div>
+
+                <!-- Food 2: Nasi Goreng -->
+                <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Nasi Goreng" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/600x400/D97706/ffffff?text=Nasi+Goreng'">
+                            <span class="absolute top-3 left-3 bg-goldCustom text-slateBg text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Nasional</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif text-lg font-bold text-white">Nasi Goreng Spesial</h3>
+                            <div class="flex text-goldCustom text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="ml-1 text-gray-300 font-bold">4.9</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Nasi beraroma kecap manis bercita rasa gurih dengan pelengkap telur, ayam, dan kerupuk renyah.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-yellow-300">Manis Gurih</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-emerald-400">Aromatic</span>
+                    </div>
+                </div>
+
+                <!-- Food 3: Sate Maranggi -->
+                <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Sate" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/600x400/064E3B/ffffff?text=Sate'">
+                            <span class="absolute top-3 left-3 bg-emeraldCustom-light text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Jawa Barat</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif text-lg font-bold text-white">Sate Maranggi</h3>
+                            <div class="flex text-goldCustom text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="ml-1 text-gray-300 font-bold">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Potongan daging sapi empuk dipanggang arang setelah dimarinasi bumbu ketumbar & kecap pilihan.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-orange-400">Smoky Grill</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-goldCustom">Manis Rempah</span>
+                    </div>
+                </div>
+
+                <!-- Food 4: Gado-Gado -->
+                <div class="glass-card glass-card-hover rounded-2xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Gado Gado" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/600x400/991B1B/ffffff?text=Gado+Gado'">
+                            <span class="absolute top-3 left-3 bg-crimson text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Jakarta</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif text-lg font-bold text-white">Gado-Gado Betawi</h3>
+                            <div class="flex text-goldCustom text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="ml-1 text-gray-300 font-bold">4.7</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Salad khas Indonesia berisi sayuran segar, lontong, dan tahu yang disiram saus kacang gurih pekat.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-emerald-400">Nutritious</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-medium text-yellow-400">Saus Kacang</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION NEWSLETTER & KONTAK -->
+    <section id="kontak" class="py-20 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-goldCustom/30 relative z-10 text-center bg-gradient-to-b from-darkBg to-slateBg">
+                
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-crimson to-goldCustom flex items-center justify-center mx-auto mb-6 text-2xl text-white shadow-lg">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Siap Memulai Petualangan Anda?</h2>
+                <p class="text-gray-300 text-sm max-w-xl mx-auto mb-8">
+                    Dapatkan panduan eksklusif, rekomendasi destinasi tersembunyi, dan wawasan budaya nusantara langsung di kotak masuk email Anda.
+                </p>
+
+                <!-- Interactive Form -->
+                <form id="newsletter-form" onsubmit="handleSubscribe(event)" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                    <input type="email" 
+                           id="email-input" 
+                           placeholder="Masukkan alamat email Anda..." 
+                           required 
+                           class="flex-1 px-5 py-3.5 rounded-full bg-slateBg/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-goldCustom text-sm transition-colors">
+                    <button type="submit" 
+                            class="px-7 py-3.5 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-crimson/20">
+                        Berlangganan
+                    </button>
+                </form>
+
+                <p id="subscribe-message" class="hidden text-emeraldCustom-light font-semibold text-sm mt-4">
+                    <i class="fa-solid fa-circle-check"></i> Terima kasih! Anda telah terdaftar dalam buletin Nusantara.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-darkBg border-t border-gray-800 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <!-- Brand Bio -->
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-crimson to-goldCustom flex items-center justify-center text-white font-bold text-sm">
+                            N
+                        </div>
+                        <span class="font-serif font-bold text-lg text-white">NUSANTARA</span>
+                    </a>
+                    <p class="text-xs text-gray-400 leading-relaxed max-w-sm mb-4">
+                        Platform eksplorasi visual keindahan alam, kekayaan budaya, dan cita rasa autentik Republik Indonesia.
+                    </p>
+                    <div class="text-xs text-goldCustom font-serif italic">
+                        "Bhinneka Tunggal Ika — Berbeda-beda Tetapi Tetap Satu Jua"
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Navigasi Cepat</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#tentang" class="hover:text-goldCustom transition-colors">Tentang Kami</a></li>
+                        <li><a href="#destinasi" class="hover:text-goldCustom transition-colors">Destinasi Wisata</a></li>
+                        <li><a href="#budaya" class="hover:text-goldCustom transition-colors">Warisan Budaya</a></li>
+                        <li><a href="#kuliner" class="hover:text-goldCustom transition-colors">Kuliner Khas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social & Contact -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Ikuti Kami</h4>
+                    <div class="flex gap-3 mb-4">
+                        <a href="#" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-gray-300 hover:text-goldCustom hover:border-goldCustom transition-all">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-gray-300 hover:text-goldCustom hover:border-goldCustom transition-all">
+                            <i class="fa-brands fa-youtube text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full glass-card flex items-center justify-center text-gray-300 hover:text-goldCustom hover:border-goldCustom transition-all">
+                            <i class="fa-brands fa-x-twitter text-sm"></i>
+                        </a>
+                    </div>
+                    <span class="text-[11px] block text-gray-500">Hubungi: info@nusantara-pesona.id</span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Nusantara Pesona Indonesia. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-400">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-gray-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DYNAMIC DESTINATION MODAL DRAWER -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="glass-card bg-slateBg rounded-3xl max-w-lg w-full overflow-hidden border border-goldCustom/30 shadow-2xl relative animate-float">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-crimson transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Image Header -->
+            <div class="relative h-60">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-transparent to-transparent"></div>
+                <span id="modal-loc" class="absolute bottom-4 left-6 bg-crimson text-white text-xs font-bold px-3 py-1 rounded-full uppercase"></span>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 sm:p-8">
+                <h3 id="modal-title" class="font-serif text-2xl font-bold text-white mb-3"></h3>
+                <p id="modal-desc" class="text-gray-300 text-sm leading-relaxed mb-6"></p>
+
+                <div class="flex gap-3">
+                    <button onclick="closeModal()" class="flex-1 py-3 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+                        Tutup Window
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTION -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-2xl');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-2xl');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Destination Category Filter Logic
+        function filterDestinations(category) {
+            const cards = document.querySelectorAll('.dest-card');
+            const tabs = document.querySelectorAll('.dest-tab');
+
+            // Update Tab Active Style
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-crimson', 'text-white');
+                tab.classList.add('glass-card', 'text-gray-300');
+            });
+            event.currentTarget.classList.remove('glass-card', 'text-gray-300');
+            event.currentTarget.classList.add('bg-crimson', 'text-white');
+
+            // Filter Cards
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Culture Tab Switcher Logic
+        const cultureData = {
+            batik: {
+                title: "Seni Lukis Batik Tradisional",
+                desc: "Batik adalah teknik menggambar di atas kain menggunakan malam (lilin khusus). Setiap motif batik—seperti Parang, Megamendung, dan Kawung—memiliki filosofi, doa, serta status sosial tersendiri bagi pemakainya.",
+                tag: "Kain Mahakarya",
+                img: "https://images.unsplash.com/photo-1601972599720-36938d4ecd31?q=80&w=1000&auto=format&fit=crop"
+            },
+            wayang: {
+                title: "Seni Pertunjukan Wayang Kulit",
+                desc: "Wayang kulit adalah seni pertunjukan seni bayangan tradisional asal Jawa dan Bali. Dimainkan oleh seorang Dalang, Wayang membawakan kisah Mahabharata atau Ramayana yang sarat nasihat kehidupan.",
+                tag: "Seni Teater Kuno",
+                img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1000&auto=format&fit=crop"
+            },
+            gamelan: {
+                title: "Ansambel Musik Gamelan",
+                desc: "Gamelan adalah ansambel musik tradisional yang menonjolkan demung, saron, bonang, dan gong. Harmonisasi nadanya yang pentatonis menciptakan alunan meditatif khas Jawa dan Bali.",
+                tag: "Orkestra Tradisional",
+                img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop"
+            }
+        };
+
+        function switchCulture(key) {
+            const data = cultureData[key];
+            if (!data) return;
+
+            // Highlight Tab
+            document.querySelectorAll('.culture-tab').forEach(t => t.classList.replace('border-l-goldCustom', 'border-l-transparent'));
+            document.getElementById(`tab-${key}`).classList.replace('border-l-transparent', 'border-l-goldCustom');
+
+            // Update View
+            const img = document.getElementById('culture-img');
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = data.img;
+                document.getElementById('culture-title').innerText = data.title;
+                document.getElementById('culture-desc').innerText = data.desc;
+                document.getElementById('culture-tag').innerText = data.tag;
+                img.style.opacity = '1';
+            }, 200);
+        }
+
+        // Modal Controls
+        function openModal(title, loc, desc, img) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-loc').innerText = loc;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        // Newsletter Form Handler
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const input = document.getElementById('email-input');
+            const msg = document.getElementById('subscribe-message');
+            
+            if (input.value) {
+                msg.classList.remove('hidden');
+                input.value = '';
+                setTimeout(() => {
+                    msg.classList.add('hidden');
+                }, 4000);
+            }
+        }
+    </script>
+</body>
+</html>
