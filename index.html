@@ -120,12 +120,11 @@
         }
 
         .glass-card-hover {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-card-hover:hover {
-            transform: translateY(-8px);
-            border-color: rgba(217, 119, 6, 0.4);
-            box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.15);
+            border-color: rgba(217, 119, 6, 0.35);
+            box-shadow: 0 8px 24px -8px rgba(217, 119, 6, 0.12);
         }
 
         .batik-pattern {
@@ -335,116 +334,160 @@
 
             <!-- Destination Category Filter -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-8">
-                <button onclick="filterDestinations('all')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold bg-crimson text-white whitespace-nowrap shadow-md transition-all">Semua Destinasi</button>
-                <button onclick="filterDestinations('bahari')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Bahari & Pantai</button>
-                <button onclick="filterDestinations('budaya')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Candi & Sejarah</button>
-                <button onclick="filterDestinations('gunung')" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Gunung & Alam</button>
+                <button onclick="filterDestinations('all', event)" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold bg-crimson text-white whitespace-nowrap shadow-md transition-all">Semua Destinasi</button>
+                <button onclick="filterDestinations('bahari', event)" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Bahari & Pantai</button>
+                <button onclick="filterDestinations('budaya', event)" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Candi & Sejarah</button>
+                <button onclick="filterDestinations('gunung', event)" class="dest-tab px-5 py-2 rounded-full text-sm font-semibold glass-card text-gray-300 hover:text-white whitespace-nowrap transition-all">Gunung & Alam</button>
             </div>
 
             <!-- Destinations Cards Grid -->
-            <div class="reveal-on-scroll reveal-delay-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destination-grid">
+            <div class="reveal-on-scroll reveal-delay-1 grid grid-cols-1 md:grid-cols-2 gap-8" id="destination-grid">
                 
                 <!-- Card 1: Raja Ampat -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="bahari">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=800&auto=format&fit=crop" 
                              alt="Raja Ampat" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                              onerror="this.src='https://placehold.co/800x600/064E3B/ffffff?text=Raja+Ampat'">
-                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Papua Barat</span>
+                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Papua Barat Daya</span>
                         <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star text-xs"></i> 4.9
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Raja Ampat</h3>
-                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
-                                Gumpalan pulau karang eksotis dengan keanekaragaman hayati laut terkaya di planet bumi.
+                            <h3 class="font-serif text-2xl font-bold text-white mb-3 group-hover:text-goldCustom transition-colors">Raja Ampat</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Gugusan 1.500+ pulau karang di ujung barat Papua yang menyimpan <strong class="text-white">75% spesies karang dunia</strong>. Perairan Raja Ampat merupakan salah satu dari 10 lokasi selam terbaik di dunia dengan lebih dari 1.300 spesies ikan dan 600 spesies terumbu karang.
                             </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-water text-[10px]"></i> Diving & Snorkeling</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-blue-400 flex items-center gap-1.5"><i class="fa-solid fa-fish text-[10px]"></i> Biodiversitas Laut</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-goldCustom flex items-center gap-1.5"><i class="fa-solid fa-award text-[10px]"></i> UNESCO Cagar Biosfer</span>
+                            </div>
                         </div>
-                        <button onclick="openModal('Raja Ampat', 'Papua Barat', 'Raja Ampat adalah gugusan kepulauan yang terletak di barat bagian bagian Kepala Burung Pulau Papua. Perairan Raja Ampat merupakan salah satu dari 10 perairan terbaik untuk menyelam di seluruh dunia.', 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>Lihat Detail</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </button>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+                            <div class="flex items-center gap-4 text-xs text-gray-400">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-plane-departure text-[10px]"></i> Sorong</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-calendar text-[10px]"></i> Okt – Apr</span>
+                            </div>
+                            <button onclick="openDestModal('raja-ampat')" class="py-2 px-4 rounded-lg bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center gap-2">
+                                <span>Detail</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 2: Borobudur -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="budaya">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg/960px-Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg" 
                              alt="Candi Borobudur" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                              onerror="this.src='https://placehold.co/800x600/991B1B/ffffff?text=Borobudur'">
-                        <span class="absolute top-4 left-4 bg-crimson/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Jawa Tengah</span>
+                        <span class="absolute top-4 left-4 bg-crimson/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Jawa Tengah</span>
                         <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star text-xs"></i> 4.8
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Candi Borobudur</h3>
-                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
-                                Candi Buddha terbesar di dunia yang dibangun abad ke-9, warisan sejarah dunia UNESCO.
+                            <h3 class="font-serif text-2xl font-bold text-white mb-3 group-hover:text-goldCustom transition-colors">Candi Borobudur</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Monumen Buddha terbesar di dunia yang dibangun pada abad ke-9 Masehi oleh Dinasti Syailendra. Memiliki <strong class="text-white">2.672 panel relief</strong> dan <strong class="text-white">504 arca Buddha</strong> yang tersusun di 10 tingkat, menceritakan perjalanan spiritual dari alam duniawi menuju pencerahan.
                             </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-red-400 flex items-center gap-1.5"><i class="fa-solid fa-landmark text-[10px]"></i> Warisan Dunia UNESCO</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-purple-400 flex items-center gap-1.5"><i class="fa-solid fa-om text-[10px]"></i> Arsitektur Buddha</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-goldCustom flex items-center gap-1.5"><i class="fa-solid fa-sun text-[10px]"></i> Sunrise Ikonik</span>
+                            </div>
                         </div>
-                        <button onclick="openModal('Candi Borobudur', 'Magelang, Jawa Tengah', 'Candi Borobudur adalah monumen Buddha terbesar di dunia. Didesain dengan arsitektur Jawa kuno, candi ini dihiasi dengan 2.672 panel relief dan 504 patung Buddha.', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg/960px-Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>Lihat Detail</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </button>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+                            <div class="flex items-center gap-4 text-xs text-gray-400">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-location-dot text-[10px]"></i> Magelang</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-calendar text-[10px]"></i> Mei – Sep</span>
+                            </div>
+                            <button onclick="openDestModal('borobudur')" class="py-2 px-4 rounded-lg bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center gap-2">
+                                <span>Detail</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 3: Taman Nasional Komodo -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="gunung">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=800&auto=format&fit=crop" 
                              alt="Pulau Padar Komodo" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                              onerror="this.src='https://placehold.co/800x600/D97706/ffffff?text=Komodo'">
-                        <span class="absolute top-4 left-4 bg-goldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Nusa Tenggara Timur</span>
+                        <span class="absolute top-4 left-4 bg-goldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Nusa Tenggara Timur</span>
                         <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star text-xs"></i> 4.9
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Pulau Komodo</h3>
-                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
-                                Habitat asli kadal purba terbesar di dunia, dikelilingi lanskap perbukitan savana spektakuler.
+                            <h3 class="font-serif text-2xl font-bold text-white mb-3 group-hover:text-goldCustom transition-colors">Taman Nasional Komodo</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Habitat alami <strong class="text-white">Komodo (Varanus komodoensis)</strong>, kadal terbesar di dunia yang bisa tumbuh hingga 3 meter. Taman nasional ini mencakup tiga pulau besar—Komodo, Rinca, dan Padar—serta dikelilingi pantai berpasir pink yang langka dan perairan kaya kehidupan laut.
                             </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-orange-400 flex items-center gap-1.5"><i class="fa-solid fa-dragon text-[10px]"></i> Komodo Dragon</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-pink-400 flex items-center gap-1.5"><i class="fa-solid fa-umbrella-beach text-[10px]"></i> Pink Beach</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-goldCustom flex items-center gap-1.5"><i class="fa-solid fa-mountain text-[10px]"></i> Pulau Padar</span>
+                            </div>
                         </div>
-                        <button onclick="openModal('Taman Nasional Komodo', 'NTT', 'Taman Nasional Komodo melindungi kadal komodo purba yang langka serta panorama perbukitan savana khas dan Pink Beach yang eksotis.', 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>Lihat Detail</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </button>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+                            <div class="flex items-center gap-4 text-xs text-gray-400">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-plane-departure text-[10px]"></i> Labuan Bajo</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-calendar text-[10px]"></i> Apr – Des</span>
+                            </div>
+                            <button onclick="openDestModal('komodo')" class="py-2 px-4 rounded-lg bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center gap-2">
+                                <span>Detail</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 4: Bali & Ubud -->
                 <div class="dest-card glass-card glass-card-hover rounded-2xl overflow-hidden group flex flex-col" data-category="bahari">
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" 
                              alt="Bali Ubud" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                              onerror="this.src='https://placehold.co/800x600/064E3B/ffffff?text=Bali'">
-                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bali</span>
+                        <span class="absolute top-4 left-4 bg-emeraldCustom/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Bali</span>
                         <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-goldCustom px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star text-xs"></i> 4.9
                         </div>
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-xl font-bold text-white mb-2 group-hover:text-goldCustom transition-colors">Ubud & Tanah Lot</h3>
-                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
-                                Pulau Dewata yang terkenal dengan ketenangan persawahan terasering, pura spiritual, dan pantai indah.
+                            <h3 class="font-serif text-2xl font-bold text-white mb-3 group-hover:text-goldCustom transition-colors">Ubud & Tanah Lot, Bali</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Pusat seni dan budaya Bali dengan sawah terasering Tegallalang yang ikonik, Monkey Forest, dan galeri seni kontemporer. <strong class="text-white">Pura Tanah Lot</strong> yang berdiri di atas batu karang di tengah laut merupakan salah satu ikon paling fotogenik di Indonesia.
                             </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-seedling text-[10px]"></i> Sawah Terasering</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-purple-400 flex items-center gap-1.5"><i class="fa-solid fa-gopuram text-[10px]"></i> Pura & Spiritual</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-yellow-300 flex items-center gap-1.5"><i class="fa-solid fa-palette text-[10px]"></i> Seni & Galeri</span>
+                            </div>
                         </div>
-                        <button onclick="openModal('Ubud & Bali', 'Provinsi Bali', 'Bali menawarkan harmoni antara seni, ketenangan alam Ubud, pantai eksotis, dan budaya spiritual Hindu Bali yang autentik.', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200&auto=format&fit=crop')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>Lihat Detail</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </button>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-800">
+                            <div class="flex items-center gap-4 text-xs text-gray-400">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-plane-departure text-[10px]"></i> Ngurah Rai</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-calendar text-[10px]"></i> Apr – Okt</span>
+                            </div>
+                            <button onclick="openDestModal('bali')" class="py-2 px-4 rounded-lg bg-white/10 hover:bg-goldCustom hover:text-slateBg text-gray-200 text-xs font-bold transition-all flex items-center gap-2">
+                                <span>Detail</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -757,31 +800,29 @@
     </footer>
 
     <!-- DYNAMIC DESTINATION MODAL DRAWER -->
-    <div id="detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity">
-        <div class="glass-card bg-slateBg rounded-3xl max-w-lg w-full overflow-hidden border border-goldCustom/30 shadow-2xl relative animate-float">
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onclick="if(event.target===this)closeModal()">
+        <div class="glass-card bg-slateBg rounded-3xl max-w-2xl w-full overflow-hidden border border-goldCustom/30 shadow-2xl relative max-h-[90vh] overflow-y-auto no-scrollbar">
             <!-- Close Button -->
             <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-crimson transition-colors">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <!-- Modal Image Header -->
-            <div class="relative h-60">
+            <div class="relative h-64 sm:h-72">
                 <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slateBg via-transparent to-transparent"></div>
-                <span id="modal-loc" class="absolute bottom-4 left-6 bg-crimson text-white text-xs font-bold px-3 py-1 rounded-full uppercase"></span>
+                <span id="modal-loc" class="absolute bottom-4 left-6 bg-crimson text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase"></span>
                 <a id="modal-img-credit" href="https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1013_8739.jpg" target="_blank" rel="noopener noreferrer" class="hidden absolute bottom-4 right-4 bg-black/60 text-white/90 text-[10px] px-2 py-1 rounded">Foto: Jakub Hałun · CC BY-SA 4.0</a>
             </div>
 
             <!-- Modal Content -->
             <div class="p-6 sm:p-8">
-                <h3 id="modal-title" class="font-serif text-2xl font-bold text-white mb-3"></h3>
+                <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-white mb-4"></h3>
                 <p id="modal-desc" class="text-gray-300 text-sm leading-relaxed mb-6"></p>
 
-                <div class="flex gap-3">
-                    <button onclick="closeModal()" class="flex-1 py-3 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
-                        Tutup Window
-                    </button>
-                </div>
+                <button onclick="closeModal()" class="w-full py-3 rounded-full bg-gradient-to-r from-crimson to-goldCustom text-white font-bold text-sm hover:opacity-90 transition-opacity">
+                    Tutup
+                </button>
             </div>
         </div>
     </div>
@@ -870,17 +911,21 @@
         });
 
         // Destination Category Filter Logic
-        function filterDestinations(category) {
+        function filterDestinations(category, event) {
             const cards = document.querySelectorAll('.dest-card');
             const tabs = document.querySelectorAll('.dest-tab');
+            const currentTarget = event ? event.currentTarget : null;
 
             // Update Tab Active Style
             tabs.forEach(tab => {
                 tab.classList.remove('bg-crimson', 'text-white');
                 tab.classList.add('glass-card', 'text-gray-300');
             });
-            event.currentTarget.classList.remove('glass-card', 'text-gray-300');
-            event.currentTarget.classList.add('bg-crimson', 'text-white');
+
+            if (currentTarget) {
+                currentTarget.classList.remove('glass-card', 'text-gray-300');
+                currentTarget.classList.add('bg-crimson', 'text-white');
+            }
 
             // Filter Cards
             cards.forEach(card => {
@@ -899,7 +944,7 @@
                 desc: "Batik adalah teknik menggambar di atas kain menggunakan malam (lilin khusus). Setiap motif batik—seperti Parang, Megamendung, dan Kawung—memiliki filosofi, doa, serta status sosial tersendiri bagi pemakainya.",
                 tag: "Kain Mahakarya",
                 alt: "Kain batik Peranakan Indonesia bermotif burung dan bunga",
-                img: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Peranakan_batik_altar_cloth%2C_late_19th_century%2C_East-West_Center.JPG/1280px-Peranakan_batik_altar_cloth%2C_late_19th_century%2C_East-West_Center.JPG",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqE_UyAQhD-ro_DA0xe6ni1Pjr7SZSlyKsDGabFsyy3g&s=10",
                 credit: "Foto kain batik Peranakan · CC0",
                 creditUrl: "https://commons.wikimedia.org/wiki/File:Peranakan_batik_altar_cloth,_late_19th_century,_East-West_Center.JPG",
                 action: "Jelajahi Motif Batik →"
@@ -955,13 +1000,107 @@
             }, 200);
         }
 
+        // Destination Detail Data
+        const destData = {
+            'raja-ampat': {
+                title: 'Raja Ampat',
+                loc: 'Papua Barat Daya',
+                img: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=1200&auto=format&fit=crop',
+                showCredit: false,
+                desc: `
+                    <p class="mb-3">Raja Ampat merupakan kepulauan yang terdiri dari empat pulau utama — <strong class="text-white">Waigeo, Misool, Salawati, dan Batanta</strong> — serta lebih dari 1.500 pulau kecil. Terletak di jantung Segitiga Karang Dunia (Coral Triangle), kawasan ini menyimpan 75% dari seluruh spesies karang yang diketahui di bumi.</p>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Mengapa Harus Berkunjung?</p>
+                    <ul class="list-disc list-inside space-y-1.5 mb-3 text-gray-300">
+                        <li>Lebih dari <strong class="text-white">1.300 spesies ikan tropis</strong> dan 600 jenis terumbu karang</li>
+                        <li>Spot diving dan snorkeling kelas dunia — masuk 10 besar terbaik global</li>
+                        <li>Habitat penyu, manta ray, hiu paus, dan dugong</li>
+                        <li>Tebing karst menjulang, laguna tersembunyi, dan hutan bakau asri</li>
+                    </ul>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Info Penting</p>
+                    <ul class="list-disc list-inside space-y-1.5 text-gray-300">
+                        <li><strong class="text-white">Akses:</strong> Penerbangan ke Sorong, lanjut speedboat 2–4 jam</li>
+                        <li><strong class="text-white">Musim terbaik:</strong> Oktober – April (laut tenang, visibilitas tinggi)</li>
+                        <li><strong class="text-white">Status:</strong> Cagar Biosfer UNESCO & Kawasan Konservasi Laut terluas di Indonesia</li>
+                    </ul>
+                `
+            },
+            'borobudur': {
+                title: 'Candi Borobudur',
+                loc: 'Magelang, Jawa Tengah',
+                img: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg/960px-Borobudur%2C_Java%2C_Indonesia%2C_20220817_1013_8739.jpg',
+                showCredit: true,
+                desc: `
+                    <p class="mb-3">Candi Borobudur dibangun sekitar tahun <strong class="text-white">800 Masehi</strong> pada masa Dinasti Syailendra dan merupakan monumen Buddha terbesar di dunia. Strukturnya terdiri dari 10 tingkatan — 6 lantai persegi dan 4 lantai melingkar — dimahkotai stupa besar di puncaknya.</p>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Fakta Menarik</p>
+                    <ul class="list-disc list-inside space-y-1.5 mb-3 text-gray-300">
+                        <li><strong class="text-white">2.672 panel relief</strong> yang membentang sepanjang 6 km — rangkaian terpanjang di dunia</li>
+                        <li><strong class="text-white">504 arca Buddha</strong> menggambarkan berbagai sikap Dhyani Buddha</li>
+                        <li>Terkubur di bawah abu vulkanik selama berabad-abad, ditemukan kembali tahun 1814 oleh Sir Thomas Stamford Raffles</li>
+                        <li>Situs Warisan Dunia UNESCO sejak 1991</li>
+                    </ul>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Tips Berkunjung</p>
+                    <ul class="list-disc list-inside space-y-1.5 text-gray-300">
+                        <li><strong class="text-white">Waktu terbaik:</strong> Pagi hari saat sunrise — kabut menyingkap siluet Gunung Merapi dan Merbabu</li>
+                        <li><strong class="text-white">Musim ideal:</strong> Mei – September (musim kemarau, langit cerah)</li>
+                        <li><strong class="text-white">Lokasi:</strong> 42 km dari Yogyakarta, mudah dijangkau via darat</li>
+                    </ul>
+                `
+            },
+            'komodo': {
+                title: 'Taman Nasional Komodo',
+                loc: 'Manggarai Barat, NTT',
+                img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?q=80&w=1200&auto=format&fit=crop',
+                showCredit: false,
+                desc: `
+                    <p class="mb-3">Taman Nasional Komodo didirikan tahun 1980 untuk melindungi <strong class="text-white">Komodo (Varanus komodoensis)</strong>, satu-satunya kadal raksasa purba yang masih hidup di dunia. Hewan ini dapat tumbuh hingga 3 meter dan berat 70 kg.</p>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Highlights Destinasi</p>
+                    <ul class="list-disc list-inside space-y-1.5 mb-3 text-gray-300">
+                        <li><strong class="text-white">Pulau Komodo & Rinca:</strong> Tempat terbaik melihat komodo di habitat aslinya, dipandu ranger profesional</li>
+                        <li><strong class="text-white">Pulau Padar:</strong> Pemandangan ikonik tiga teluk berbeda warna dari puncak bukit</li>
+                        <li><strong class="text-white">Pink Beach:</strong> Satu dari hanya 7 pantai berpasir merah muda di seluruh dunia</li>
+                        <li>Perairan kaya terumbu karang, manta ray, dan hiu</li>
+                    </ul>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Info Penting</p>
+                    <ul class="list-disc list-inside space-y-1.5 text-gray-300">
+                        <li><strong class="text-white">Akses:</strong> Penerbangan ke Labuan Bajo, lalu tur kapal 1–3 hari</li>
+                        <li><strong class="text-white">Musim terbaik:</strong> April – Desember (cuaca kering, laut tenang)</li>
+                        <li><strong class="text-white">Status:</strong> Situs Warisan Dunia UNESCO & New 7 Wonders of Nature</li>
+                    </ul>
+                `
+            },
+            'bali': {
+                title: 'Ubud & Tanah Lot, Bali',
+                loc: 'Provinsi Bali',
+                img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200&auto=format&fit=crop',
+                showCredit: false,
+                desc: `
+                    <p class="mb-3">Bali, yang dijuluki <strong class="text-white">Pulau Dewata</strong>, menawarkan perpaduan unik antara keindahan alam, spiritualitas, dan seni. Ubud di dataran tinggi adalah pusat budaya pulau ini, sementara Tanah Lot menjadi ikon sunset paling fotogenik di Indonesia.</p>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Yang Wajib Dikunjungi</p>
+                    <ul class="list-disc list-inside space-y-1.5 mb-3 text-gray-300">
+                        <li><strong class="text-white">Sawah Terasering Tegallalang:</strong> Warisan Budaya UNESCO dengan sistem irigasi subak tradisional</li>
+                        <li><strong class="text-white">Monkey Forest Ubud:</strong> Hutan suci yang dihuni ratusan kera ekor panjang</li>
+                        <li><strong class="text-white">Pura Tanah Lot:</strong> Pura laut megah di atas batu karang, lokasi sunset legendaris</li>
+                        <li><strong class="text-white">Museum & Galeri:</strong> ARMA, Neka Museum, dan galeri seni kontemporer bertaraf internasional</li>
+                    </ul>
+                    <p class="font-semibold text-white text-xs uppercase tracking-wider mb-2">Budaya & Kuliner</p>
+                    <ul class="list-disc list-inside space-y-1.5 text-gray-300">
+                        <li>Upacara Hindu spektakuler: Nyepi, Galungan, dan persembahan canang sari harian</li>
+                        <li>Kuliner khas: babi guling, bebek betutu, lawar, dan sate lilit</li>
+                        <li><strong class="text-white">Musim terbaik:</strong> April – Oktober (kemarau, cuaca cerah)</li>
+                    </ul>
+                `
+            }
+        };
+
         // Modal Controls
-        function openModal(title, loc, desc, img) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-loc').innerText = loc;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-img').src = img;
-            document.getElementById('modal-img-credit').classList.toggle('hidden', title !== 'Candi Borobudur');
+        function openDestModal(key) {
+            const data = destData[key];
+            if (!data) return;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-loc').innerText = data.loc;
+            document.getElementById('modal-desc').innerHTML = data.desc;
+            document.getElementById('modal-img').src = data.img;
+            document.getElementById('modal-img-credit').classList.toggle('hidden', !data.showCredit);
             document.getElementById('detail-modal').classList.remove('hidden');
         }
 
